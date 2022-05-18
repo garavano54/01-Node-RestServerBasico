@@ -1,9 +1,11 @@
-// npm i express dotenv  (Para el servidor y las variables de entorno)
-// npm i cors            (Para los middlewares) - https://www.npmjs.com/package/cors
+// npm i express dotenv     (Para el servidor y las variables de entorno)
+// npm i cors               (Para los middlewares) - https://www.npmjs.com/package/cors
+// npm i mongoose           (Para conectarse a MongoDB)
+// npm i bcryptjs           (Para encriptar contraseña)
+// npm i express-validator  (Para validar. Ejemplo el email)
 
 require('dotenv').config();
 const Server = require('./models/server');
-
 
 const server = new Server();
 server.listen();
