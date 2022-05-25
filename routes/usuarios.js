@@ -1,16 +1,27 @@
 
 const { Router } = require('express');
 const { check }  = require('express-validator');
-const Role = require('../models/role');
+// const Role = require('../models/role');
+
+// const { validarCampos } = require('../middlewares/validar-campos');
+// const { validarJWT }    = require('../middlewares/validar-jwt');
+// const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
+
+// Se puede resumir como: 
+const {
+        validarCampos,      // validar-campos
+        validarJWT,         // De validar-jwt
+        esAdminRole,        // De validar-roles
+        tieneRole           // De validar-roles
+} = require('../middlewares');
+
+const { esRoleValido, emailExiste, existeUsuarioPorId }  = require('../helpers/db-validators');
 
 const { usuariosGet, 
         usuariosPost,
         usuariosPut,
         usuariosPatch,
         usuariosDelete } = require('../controllers/usuarios');
-
-const { validarCampos } = require('../middlewares/validar-campos');
-const { esRoleValido, emailExiste, existeUsuarioPorId }  = require('../helpers/db-validators');
 
 const router = Router();
 
@@ -35,6 +46,9 @@ router.put('/:id', [
 router.patch('/', usuariosPatch);
 
 router.delete('/:id', [
+        validarJWT,
+        // esAdminRole,                                 // Valida que tenga un Rol determinado. ADMIN_ROLE
+        tieneRole('ADMIN_ROLE', 'VENTAS_ROLE'),         // Valida que tenga una lista de roles permitidos.
         check('id', 'No es un ID válido').isMongoId(),
         check('id').custom( existeUsuarioPorId ),
         validarCampos
