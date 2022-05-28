@@ -4,19 +4,13 @@
 // npm i bcryptjs           (Para encriptar contraseña)
 // npm i express-validator  (Para validar. Ejemplo el email)
 // npm i jsonwebtoken       (Para los JWT)
+// npm install google-auth-library --save   (Para Google - https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)
 
 require('dotenv').config();
 const Server = require('./models/server');
 
 const server = new Server();
 server.listen();
-
-
-
-
-
-
-
 
 
 // Los middleware son funciones de javascript, la diferencia es que estas funciones tienen acceso al objeto de solicitud (req), al objeto de respuesta (res) y a la función next() que ejecuta el siguiente middleware en el ciclo.
