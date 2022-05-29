@@ -16,6 +16,7 @@
            data-auto_prompt="false"
            data-callback="handleCredentialResponse">
         </div>
+
         <div class="g_id_signin"
            data-type="standard"
            data-size="large"
@@ -32,12 +33,16 @@
         Cerrar Sesión
     </button>
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
+
+        var url = ( window.location.hostname.includes('localhost')) 
+                ? 'http://localhost:8082/api/auth/google'
+                : 'https://agv-node-rest-server.herokuapp.com/api/auth/google'
+
          function handleCredentialResponse(response) {
 
             const body = { id_token: response.credential };
-            fetch('http://localhost:8082/api/auth/google', {
+            fetch(url, {
                 method: 'POST',
                 // mode: 'cors', 
                 headers: {
@@ -63,5 +68,8 @@
         }   
 
     </script> 
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 </body>
 </html>
