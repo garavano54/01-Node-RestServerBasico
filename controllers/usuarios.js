@@ -18,7 +18,7 @@ const usuariosGet = async(req = request, res = response) => {
     // const total = await Usuario.countDocuments(query);
 
     // Se optimiza el código para que se ejecuten de manera simultanea ambas promesas. Se mandan en un arreglo las 2 promesas en orden y luego se desestructura el arreglo. 
-    const [ usuarios, total ] = await Promise.all([ 
+    const [ total, usuarios ] = await Promise.all([ 
         Usuario.countDocuments(query),
         Usuario.find(query)
             .skip(Number(desde))
